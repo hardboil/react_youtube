@@ -15,7 +15,7 @@ const VideoItem = ({ video: { snippet } }) => (
         alt="thumbnail"
       />
       <div className={styles.metadata}>
-        <p className={styles.video}>{snippet.title}</p>
+        <p className={styles.title}>{snippet.title}</p>
         <p className={styles.channel}>{snippet.channelTitle}</p>
       </div>
     </div>
