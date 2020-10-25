@@ -3,6 +3,7 @@ import styles from "./app.module.css";
 import SearchHeader from "./components/search_header/search_header";
 import VideoList from "./components/video_list/video_list";
 import VideoDetail from "./components/video_detail/video_detail";
+import { useCallback } from "react";
 
 function App({ youtube }) {
   const [videos, setVideos] = useState([]);
@@ -12,7 +13,18 @@ function App({ youtube }) {
     setSelectedVideo(video);
   };
 
-  const search = (query) => {
+  // ! useCallback 사용에 주의
+  const search = useCallback(
+    (query) => {
+      setSelectedVideo(null);
+      youtube
+        .search(query) //
+        .then((videos) => setVideos(videos));
+    },
+    [youtube]
+  );
+
+  const _search = (query) => {
     // ! youtube.js 작성 전 코드
     // console.log(`search : ${query}`);
     // const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
@@ -63,7 +75,7 @@ function App({ youtube }) {
     youtube
       .mostPopular() //
       .then((videos) => setVideos(videos));
-  }, []);
+  }, [youtube]);
   return (
     <div className={styles.app}>
       <SearchHeader onSearch={search} />

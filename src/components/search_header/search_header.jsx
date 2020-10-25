@@ -2,8 +2,9 @@ import styles from "./search_header.module.css";
 
 import React from "react";
 import { useRef } from "react";
+import { memo } from "react";
 
-const SearchHeader = ({ onSearch }) => {
+const SearchHeader = memo(({ onSearch }) => {
   const inputRef = useRef();
   const handleSearch = () => {
     const value = inputRef.current.value;
@@ -20,6 +21,7 @@ const SearchHeader = ({ onSearch }) => {
     }
   };
 
+  console.log("call SearchHeader !!");
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -42,6 +44,48 @@ const SearchHeader = ({ onSearch }) => {
       </button>
     </header>
   );
-};
+});
+
+// ? 변경 전 before use memo
+// const SearchHeader = ({ onSearch }) => {
+//   const inputRef = useRef();
+//   const handleSearch = () => {
+//     const value = inputRef.current.value;
+//     console.log(value);
+//     onSearch(value);
+//   };
+//   const onClick = () => {
+//     handleSearch();
+//   };
+
+//   const onKeyPress = (event) => {
+//     if (event.key === "Enter") {
+//       handleSearch();
+//     }
+//   };
+
+//   return (
+//     <header className={styles.header}>
+//       <div className={styles.logo}>
+//         <img className={styles.img} src="/images/logo.png" alt="logo" />
+//         <h1 className={styles.title}>Youtube</h1>
+//       </div>
+//       <input
+//         ref={inputRef}
+//         className={styles.input}
+//         type="search"
+//         placeholder="Search ..."
+//         onKeyPress={onKeyPress}
+//       />
+//       <button className={styles.button} type="submit" onClick={onClick}>
+//         <img
+//           className={styles.buttonImg}
+//           src="/images/search.png"
+//           alt="search"
+//         />
+//       </button>
+//     </header>
+//   );
+// };
 
 export default SearchHeader;
