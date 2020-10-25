@@ -33,9 +33,17 @@ function App({ youtube }) {
     // const youtube = new Youtube();
 
     // ?
+    // youtube
+    //   .search(query) //
+    //   .then((videos) => setVideos(videos));
+
+    // ?
+    setSelectedVideo(null);
     youtube
       .search(query) //
-      .then((videos) => setVideos(videos));
+      .then((videos) => {
+        setVideos(videos);
+      });
   };
   useEffect(() => {
     // ! youtube.js 작성 전 코드
